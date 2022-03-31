@@ -1,7 +1,10 @@
+import {view} from "../view/view.js"
 class model{
 
-constructor(){
+#view
 
+constructor(){
+	this.#view = new view();
 }
 
 }
