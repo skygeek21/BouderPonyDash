@@ -1,52 +1,47 @@
+img
+{
+	image-rendering: pixelated;
+
+}
+
 h1
 {
-display: flex;
+	display: flex;
 justify-content: center;
 font-family:'Times New Roman', Times, serif;
 font-size: 50px;
 color: turquoise;
 }
 
-.maintenace{
+*{
 
-	margin: 0;
+	justify-content: center;
+
+}
+
+.maintenace{
 
 
 	display: flex;
 	justify-content: center;
 	flex-direction: column;
+	text-align: center;
 
-	padding: 10px;
 
-	background-color: rgb(100, 4, 104);
-
-	box-sizing: border-box;
-	position: absolute;
-  	top: 50%;
-	left: 50%;
-
-	transform: translateY(-50%) translateX(-50%);
 }
 
 .menu
 {
-	margin: 0;
 
-
+	
+	padding: 10px;
 	display: flex;
 	justify-content: center;
 	flex-direction: column;
-
-	padding: 50px;
+	max-width: 400px;
 
 	background-color: rgb(100, 4, 104);
 
-	box-sizing: border-box;
-	position: absolute;
-  	top: 50%;
-	left: 50%;
-
-	transform: translateY(-50%) translateX(-50%);
 
 }
 
@@ -55,10 +50,9 @@ button {
 
 	color: white;
 	box-sizing: border-box;
-	padding: 50px;
-	padding-left: 200px;
-	padding-right: 200px;
-	margin-bottom: 40px;
+	padding: 10px;
+
+
 	background-color: rgb(214, 59, 228);
 	border-style: none;
 	border-color: white;
