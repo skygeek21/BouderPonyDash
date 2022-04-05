@@ -73,17 +73,17 @@ button:hover{
 body{
 background-color: rgb(187, 1, 187);
 }
-.game{
+game{
 	background-color: black;
 	color: rgb(255, 255, 255);
 }
 
-.game > div {
+game > div {
     display: flex;
 
 }
 
-.game > div > div {
+game > div > div {
     display: flex;
     justify-content: center;
     align-items: center;

@@ -14,4 +14,6 @@ class mine{
 		}
 	}
 
+	get map() { return this.#map;}
+
 }
