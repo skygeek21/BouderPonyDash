@@ -18,7 +18,7 @@ mine.map.forEach((line) => {
 	const linehtml = document.createElement("div");
 	line.forEach(element => {
 		const elemhtml = document.createElement("img");
-		elemhtml.src = "../../img/pony-town-Yeralda-boop-blinking-4x.gif";
+		elemhtml.src = "../../img/diams.png";
 		linehtml.appendChild(elemhtml);
 	});
 	mapview.appendChild(linehtml);
