@@ -4,25 +4,47 @@ export class view{
 
 #controleur;
 
-constructor(control){
-	this.#controleur = control;
+constructor(controle){
+	this.#controleur = controle;
 	this.afficher();
 }
 
 afficher(){
-const mine = this.#controleur.model;
+
+
 const mapview = document.querySelector("game");
 mapview.innerHTML = "";
-
-mine.map.forEach((line) => {
+for( var i = 0;i < 16; i++){
 	const linehtml = document.createElement("div");
-	line.forEach(element => {
+	for (let y = 0; y < 32; y++) {
 		const elemhtml = document.createElement("img");
-		elemhtml.src = "../../img/diams.png";
+
+			switch (this.#controleur.getType(i,y)) {
+				case 'T':
+					elemhtml.src = "../../img/diams.png";
+					break;
+				case 'M':
+					elemhtml.src = "../../img/mur.gif";
+					break;
+				case 'P':
+					elemhtml.src = "../../img/pony-town-Yeralda-stand-blinking-4x(1).png";
+					break;
+				case 'D':
+					elemhtml.src = "../../img/diams.png";
+					break;
+				case 'R':
+					elemhtml.src = "../../img/diams.png";
+					break;
+				case ' ':
+					elemhtml.src = "../../img/diams.png";
+					break;
+				default:
+					break;
+			}
 		linehtml.appendChild(elemhtml);
-	});
+	}
 	mapview.appendChild(linehtml);
-});
+}
 
 }
 

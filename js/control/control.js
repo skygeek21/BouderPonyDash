@@ -12,5 +12,8 @@ constructor(){
 
 get model() { return this.#model;}
 
+getType(x,y){
+	console.log(this.#model.map)
+	return (this.#model.map[x])[y];}
 
 }
