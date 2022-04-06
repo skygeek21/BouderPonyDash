@@ -83,14 +83,11 @@ game > div {
 
 }
 
-game > div > div {
+game > div > img {
     display: flex;
     justify-content: center;
     align-items: center;
     width: min(3.125vw, 6.25vh);
 	height: min(3.125vw, 6.25vh);
 
-    position: relative;
-    background: url(../img/pony-town-Yeralda-trot-blinking-4x\(1\).gif) 50% 50% no-repeat;
-	background-size: 80%;
 }

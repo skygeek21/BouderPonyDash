@@ -1,14 +1,14 @@
-import {elements} from "./elements"
+import {elements} from "./elements.js"
 
-class mine{
+export class mine{
 
 #map
 
 	constructor(){
-		this.#map = new Array(32)
-		for( var i = 0;i < 32; i++){
-			this.#map[i] = new Array(16);
-			for (let y = 0; y < 16; y++) {
+		this.#map = new Array(16)
+		for( var i = 0;i < 16; i++){
+			this.#map[i] = new Array(32);
+			for (let y = 0; y < 32; y++) {
 				this.#map[i][y] = new elements();
 			}
 		}

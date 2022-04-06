@@ -1,14 +1,16 @@
-import {mine} from "../model/mine"
-import {view} from "../view/view"
+import {mine} from "../model/mine.js"
+import {view} from "../view/view.js"
 
-class control{
+export class control{
 
-#view
-#model
+#view;
+#model;
 
 constructor(){
-	this.#view = new view();
 	this.#model = new mine();
 }
+
+get model() { return this.#model;}
+
 
 }

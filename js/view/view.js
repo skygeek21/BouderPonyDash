@@ -1,19 +1,27 @@
 import {control} from "../control/control.js"
 
-class view{
+export class view{
 
 #controleur;
 
-constructor(){
+constructor(control){
 	this.#controleur = control;
+	this.afficher();
 }
 
 afficher(){
-const mine = this.#controleur.mine;
-
-
+const mine = this.#controleur.model;
+const mapview = document.querySelector("game");
+mapview.innerHTML = "";
 
 mine.map.forEach((line) => {
+	const linehtml = document.createElement("div");
+	line.forEach(element => {
+		const elemhtml = document.createElement("img");
+		elemhtml.src = "../../img/pony-town-Yeralda-boop-blinking-4x.gif";
+		linehtml.appendChild(elemhtml);
+	});
+	mapview.appendChild(linehtml);
 });
 
 }
