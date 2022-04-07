@@ -4,8 +4,9 @@ export class mine{
 #map
 #playerX
 #playerY
+#gameOver
 	constructor(){
-
+		this.#gameOver = false
 		this.initMap();
 
 	}
@@ -66,6 +67,7 @@ export class mine{
 		return this.#map[x][y]
 	}
 	PlayerMoxe(mx,my){
+		if(this.#gameOver) {return;}
 		if ((this.#playerX + mx >= 0 && this.#playerX + mx < 16) && (this.#playerY + mx >= 0 && this.#playerY + mx < 32)) {
 			let map = this.#map;
 			const next = this.#map[this.#playerX+mx][this.#playerY+my];
@@ -101,6 +103,32 @@ export class mine{
 					break;
 				}
 		}
-
+		this.appliedPhysic();
+	}
+	appliedPhysic(){
+		for (let X = 0; X < 16; X++) {
+			for (let Y = 0; Y <32; Y++) {
+				if(this.#map[X][Y] == 'R'  && this.#map[X+1][Y] == ' ' ){
+					this.#map[X+1][Y] = 'R';
+					this.#map[X][Y] = ' ';
+					for(let i = 2 ; X+i < 16; i++){
+						if(this.#map[X+i][Y] == 'P'){
+							console.log("gameOver")
+							this.#gameOver = true;
+							this.#map[X+i][Y] = 'R';
+							this.#map[X+i-1][Y] = ' ';
+						}if(this.#map[X+i][Y] != ' '){
+							break;
+						}else{
+							this.#map[X+i][Y] = 'R';
+							this.#map[X+i-1][Y] = ' ';
+						}
+					}
+				}
+				
+			}
+			
+		}
+		console.log(this.#map)
 	}
 }

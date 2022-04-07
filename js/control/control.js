@@ -15,7 +15,7 @@ constructor(){
 }
 
 async update(filename){
-	await this.#model.readfile2("../../LEVEL3")
+	await this.#model.readfile2("../../LEVEL1")
 	console.log(this.#model.map);
 	this.#view.afficher();
 
