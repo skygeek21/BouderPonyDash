@@ -4,19 +4,26 @@ export class view{
 
 #controleur;
 
-constructor(controle){
-	this.#controleur = controle;
+constructor(control){
+	this.#controleur = control;
+	document.addEventListener('keydown', (event) => {
+		this.#controleur.movePlayer(event.key);
+		this.afficher();
+		console.log("je suis la")
+		// Alert the key name and key code on keydown
+
+	  }, true);
 }
 
 afficher(){
 
 
-const mapview = document.querySelector("game");
-mapview.innerHTML = "";
-for( var i = 0;i < 16; i++){
-	const linehtml = document.createElement("div");
-	for (let y = 0; y < 32; y++) {
-		const elemhtml = document.createElement("img");
+	const mapview = document.querySelector("game");
+	mapview.innerHTML = "";
+	for( var i = 0;i < 16; i++){
+		const linehtml = document.createElement("div");
+		for (let y = 0; y < 32; y++) {
+			const elemhtml = document.createElement("img");
 
 			switch (this.#controleur.getType(i,y)) {
 				case 'T':
@@ -39,12 +46,13 @@ for( var i = 0;i < 16; i++){
 					break;
 				default:
 					break;
+				}
+				linehtml.appendChild(elemhtml);
 			}
-		linehtml.appendChild(elemhtml);
+			mapview.appendChild(linehtml);
+		}
+
+
 	}
-	mapview.appendChild(linehtml);
-}
 
-}
-
-}
+}		
