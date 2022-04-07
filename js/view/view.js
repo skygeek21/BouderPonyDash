@@ -27,7 +27,7 @@ for( var i = 0;i < 16; i++){
 					elemhtml.src = "../../img/mur.gif";
 					break;
 				case 'P':
-					elemhtml.src = "../../img/pony-town-Yeralda-stand-blinking-4x(1).png";
+					elemhtml.src = "../../img/pony-town-Yeralda-stand-blinking-4x(1).gif";
 					break;
 				case 'D':
 					elemhtml.src = "../../img/diams.png";
