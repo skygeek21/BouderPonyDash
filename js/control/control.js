@@ -7,7 +7,18 @@ export class control{
 #model;
 
 constructor(){
+	
 	this.#model = new mine();
+	this.#view = new view(this);
+	this.update();
+	
+}
+
+async update(filename){
+	await this.#model.readfile2("../../LEVEL1")
+	console.log(this.#model.map);
+	this.#view.afficher();
+
 }
 
 get model() { return this.#model;}

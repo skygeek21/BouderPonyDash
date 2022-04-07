@@ -10,7 +10,6 @@ class main{
 	constructor()
 	{
 		this.#control = new control();
-		this.#view = new view(this.#control);
 	}
 
 }

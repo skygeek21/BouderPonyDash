@@ -6,7 +6,6 @@ export class view{
 
 constructor(controle){
 	this.#controleur = controle;
-	this.afficher();
 }
 
 afficher(){
@@ -21,7 +20,7 @@ for( var i = 0;i < 16; i++){
 
 			switch (this.#controleur.getType(i,y)) {
 				case 'T':
-					elemhtml.src = "../../img/diams.png";
+					elemhtml.src = "../../img/terre.png";
 					break;
 				case 'M':
 					elemhtml.src = "../../img/mur.gif";
@@ -33,10 +32,10 @@ for( var i = 0;i < 16; i++){
 					elemhtml.src = "../../img/diams.png";
 					break;
 				case 'R':
-					elemhtml.src = "../../img/diams.png";
+					elemhtml.src = "../../img/cayou.png";
 					break;
 				case ' ':
-					elemhtml.src = "../../img/diams.png";
+					elemhtml.src = "../../img/vide.png";
 					break;
 				default:
 					break;

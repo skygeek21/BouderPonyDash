@@ -6,7 +6,6 @@ export class mine{
 	constructor(){
 		this.#mapr = false;
 		this.initMap();
-		this.readfile("../../LEVEL1");
 
 	}
 
@@ -16,38 +15,40 @@ export class mine{
 					"MTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTM",
 					"MTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTM",
 					"MTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTM",
+					"MTTTTTTTTTTTTTTTTTRTTTTTTTTTTTTM",
+					"MTTTTTTTTTTTTTTTTTDTTTTTTTTTTTTM",
 					"MTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTM",
+					"MTTTTTTTTTTTRTTTTTTTTTTTTTTTTTTM",
+					"MTTTTTTTTTTTDTTTTTTTTTTTTTTTTTTM",
 					"MTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTM",
-					"MTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTM",
-					"MTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTM",
-					"MTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTM",
-					"MTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTM",
-					"MTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTM",
+					"MTTTTTTTTTTTTTTTT TTTTTTTTTTTTTM",
 					"MTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTM",
 					"MTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTM",
 					"MTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTM",
 					"MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM"]
 	}
 
-	async readfile(filename){
-		fetch(filename).then((response) => { // on recupère le contenu du fichier
-			response.text().then((value) => {
-				let x = 0;
-				let lines = value.split("\n");
-					lines.forEach(line => {
-							console.log(line)
-							this.#map[x] = line;
-						x++
-					});
-				});
-				
-			});
-		this.#mapr = true;
-		console.log(this.#map)
+
+	
+
+	async readfile2(filename){
+	let txt;
+	await fetch(filename)
+		.then(function(reponse) {
+			return reponse.text();
+		})
+		.then(function(reponse) {
+			txt = reponse.split("\n")
+
+
+		})
+		this.#map = txt
+	
 	}
 
 	get map() { return this.#map;}
 
 	gettype(x,y) {
-		return this.#map[x][y]}
+		return this.#map[x][y]
+	}
 }
