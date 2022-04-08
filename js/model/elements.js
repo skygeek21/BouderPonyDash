@@ -1,7 +1,0 @@
-class elements{
-
-constructor(){
-
-}
-
-}
