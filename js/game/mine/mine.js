@@ -1,7 +1,0 @@
-class mine{
-
-constructor(){
-
-}
-
-}
