@@ -15,7 +15,7 @@ constructor(){
 }
 
 async update(filename){
-	await this.#model.readfile2("../../LEVEL1")
+	await this.#model.readfile2("../../LEVEL3")
 	console.log(this.#model.map);
 	this.#view.afficher();
 
@@ -28,16 +28,16 @@ getType(x,y){
 
 movePlayer(dir){
 switch (dir) {
-	case "ArrowRight":
+	case "d":
 		this.#model.PlayerMoxe(0,1);
 		break;
-	case "ArrowLeft":
+	case "q":
 		this.#model.PlayerMoxe(0,-1);
 		break;
-	case "ArrowDown":
+	case "s":
 		this.#model.PlayerMoxe(1,0);
 		break;
-	case "ArrowUp":
+	case "z":
 		this.#model.PlayerMoxe(-1,0);
 		break;
 	default:

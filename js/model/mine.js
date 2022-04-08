@@ -91,7 +91,14 @@ export class mine{
 					this.#playerY = this.#playerY+my
 					break;
 				case 'R':
-					
+					if (mx == 0 && map[this.#playerX+mx][this.#playerY+(2*my)] == ' ') {
+						map[this.#playerX+mx][this.#playerY+(2*my)] = 'R'
+						map[this.#playerX+mx][this.#playerY+my] = 'P'
+						map[this.#playerX][this.#playerY] = ' '
+						this.#playerX = this.#playerX+mx
+						this.#playerY = this.#playerY+my
+					}
+
 					break;
 				case ' ':
 					map[this.#playerX+mx][this.#playerY+my] = 'P'
