@@ -26,7 +26,7 @@ color: rgb(228, 245, 120);
 body{
 
 	justify-content: center;
-
+	
 }
 
 .maintenace{
@@ -44,14 +44,13 @@ body{
 
 .menu
 {
-
 	margin: 0 auto;
 	
 	padding: 10px;
 	display: flex;
 
 	flex-direction: column;
-	max-width: 400px;
+	max-width: 300px;
 
 	background-color: rgb(100, 4, 104);
 }
