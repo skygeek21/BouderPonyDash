@@ -55,6 +55,19 @@ body{
 
 	background-color: rgb(100, 4, 104);
 }
+.menuniv
+{
+	display:flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+	color: rgb(100, 4, 104);
+}
+.menuniv > div
+{
+	background-color:rgb(214, 59, 228);
+	margin-top:10px;
+}
 .score
 {
 	max-height: 40px;
