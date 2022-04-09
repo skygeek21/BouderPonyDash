@@ -87,7 +87,9 @@ game > div > img {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: min(3.125vw, 6.25vh);
-	height: min(3.125vw, 6.25vh);
+    min-width: min(3.125vw, 6.25vh);
+	max-width: min(3.125vw, 6.25vh);
+	min-height: min(3.125vw, 6.25vh);
+	max-height: min(3.125vw, 6.25vh);
 
 }
