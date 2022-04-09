@@ -35,17 +35,27 @@ export class mine{
 
 	
 
-	async readfile2(filename){ // oui readfile2 ... on ne parlera pas de readfile1. Brrrr... j'ai des frissons rien que d'y pensser ...
-	let txt;
+	
+	async readfile2(filename,Level){ // oui readfile2 ... on ne parlera pas de readfile1. Brrrr... j'ai des frissons rien que d'y pensser ...
+	this.#gameOver = false;
+	this.#Diams = 0;
+	this.#maxDiams = 0;
+	this.#move = 0;
+	this.#Win = false;
+		this.#level = Level;
+		let txt;
+    var xhr = new XMLHttpRequest();
+    xhr.open('HEAD', filename, false);
+    xhr.send();
+	if(xhr.status == 404){
+		location.reload();
+	}
 	await fetch(filename)
 		.then(function(reponse) {
 			return reponse.text();
 		})
 		.then(function(reponse) {
 			txt = reponse.split("\n") // je lit les fichier du jeu
-
-
-
 		})
 
 
@@ -163,5 +173,6 @@ get move(){return this.#move};
 get Diams(){return this.#Diams};
 get maxDiams(){return this.#maxDiams};
 get Win(){return this.#Win};
+get level(){return this.#level};
 
 }

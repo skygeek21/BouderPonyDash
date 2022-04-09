@@ -10,12 +10,12 @@ constructor(){
 	
 	this.#model = new mine();
 	this.#view = new view(this);
-	this.update("../../LEVEL1");
+	this.update(1);
 	
 }
 
-async update(filename){
-	await this.#model.readfile2(filename)
+async update(level){
+	await this.#model.readfile2("../../LEVEL" +level,level)
 	this.#view.afficher();
 
 }
@@ -59,6 +59,11 @@ GetDiams(){
 
 GetWin(){return this.#model.Win;}
 
-NextLevel(){ return this.#model.nextLevel()}
+NextLevel(){
+	let level = this.#model.level; 
+	level++;
+	this.update(level)
+
+}
 
 }

@@ -11,7 +11,7 @@ constructor(control){
 		this.afficher();
 		if(this.#controleur.GetWin()){
 			if (confirm("Felicitation vous avez gagné en " + this.#controleur.GetMoves() + " mouvements")) {
-				
+				this.#controleur.NextLevel();
 			}
 
 		}
