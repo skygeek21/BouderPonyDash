@@ -8,10 +8,25 @@
     <body>
         <h1>Bouldher Ponhy Dashu</h1>
         <div class = "user">
-            <button type="button" href = "./game.html" onclick="confirm('êtes-vous sûr ?')"
+            <button type="button" href = "./game.html" onclick="Marchestp()"
             >NOUVELLE PARTIE</button> 
-            <button type="button" onclick="window.location.href = './index.html';">ACCUEIL</button>
-		</div>
+             <script>
+                 function Marchestp() {
+                if (confirm("Êtes-vous sûr ?") == true)
+                {
+                    document.location.href="./game.html"; 
+                } 
+            }</script>
+            <button type="button" href = "./index.html" onclick="Jycroa()">ACCUEIL</button>
+            <script>
+                function Jycroa(){
+                 if(confirm("Êtes-vous sûr ?") == true){
+                    document.location.href="./index.html"; 
+                 }
+
+                }
+            </script>
+        </div>
 		
 		<div class="score">
             <div>
