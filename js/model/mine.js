@@ -93,10 +93,6 @@ export class mine{
 					this.#Diams ++
 					this.#move++;
 					break;
-<<<<<<< Updated upstream
-				case 'R':
-					
-=======
 				case 'R': // si c'est un rocher ON LE POUSSE DE NOTRE CHEMIN (a condition d'etre sur l'axe Y et la presence d'un vide derière le rocher)
 					if (mx == 0 && map[this.#playerX+mx][this.#playerY+(2*my)] == ' ') {
 						map[this.#playerX+mx][this.#playerY+(2*my)] = 'R'
@@ -107,7 +103,6 @@ export class mine{
 						this.#move++;
 					}
 
->>>>>>> Stashed changes
 					break;
 				case ' ': // si c'est un vide on utilise l'acion la plus cheatée du jeu: ON SE DEPLACE
 					map[this.#playerX+mx][this.#playerY+my] = 'P'
