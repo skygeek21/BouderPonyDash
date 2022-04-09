@@ -9,16 +9,38 @@ constructor(control){
 	document.addEventListener('keydown', (event) => {
 		this.#controleur.movePlayer(event.key);
 		this.afficher();
-		console.log("je suis la")
+		if(this.#controleur.GetWin()){
+			if (confirm("Felicitation vous avez gagné en " + this.#controleur.GetMoves() + " mouvements")) {
+				this.#controleur.NextLevel();
+			}
+
+		}
 		// Alert the key name and key code on keydown
 
 	  }, true);
 }
-
 afficher(){
+	this.afficher_map();
+	this.afficher_score();
+	confirm
+}
+
+afficher_score(){
+	let scoreTag = document.querySelector("score");
+	let container = scoreTag.querySelector("div");
+	let contDiams = container.querySelector("AD")
+	contDiams.innerHTML = "Diams Available : " + this.#controleur.GetMaxDiams();
+	let score = container.querySelector("CD")
+	score.innerHTML = "Diams colected : " + this.#controleur.GetDiams();
+	let desp = container.querySelector("MOVES")
+	desp.innerHTML = "moves : " + this.#controleur.GetMoves();
+
+}
+
+afficher_map(){
 
 
-	const mapview = document.querySelector("game");
+	const mapview = document.querySelector("game"); // affiche la map
 	mapview.innerHTML = "";
 	for( var i = 0;i < 16; i++){
 		const linehtml = document.createElement("div");

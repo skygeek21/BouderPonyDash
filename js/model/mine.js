@@ -1,21 +1,30 @@
 
 export class mine{
 
+#level
 #map
 #playerX
 #playerY
+#Diams
+#move
+#maxDiams
 #gameOver
-	constructor(){
+#Win
+	constructor(){ // on constructeur tout ce qui ya de plus normal
+		this.#level = 1;
+		this.#Win = false;
 		this.#gameOver = false
+		this.#move = 0;
+		this.#Diams = 0;
+		this.#maxDiams = 0;
 		this.initMap();
 
 	}
 
-	initMap(){
+	initMap(){ // verifier si le joueur a une sauvegarde dans son local storage
 		this.#map = Array(16);
 		for (let X = 0; X < 16; X++) {
 			this.#map[X] = Array(32);
-			
 			
 		}
 		this.#playerX = 1;
@@ -26,37 +35,41 @@ export class mine{
 
 	
 
-	async readfile2(filename){
-	let txt;
+	
+	async readfile2(filename,Level){ // oui readfile2 ... on ne parlera pas de readfile1. Brrrr... j'ai des frissons rien que d'y pensser ...
+	this.#gameOver = false;
+	this.#Diams = 0;
+	this.#maxDiams = 0;
+	this.#move = 0;
+	this.#Win = false;
+		this.#level = Level;
+		let txt;
+    var xhr = new XMLHttpRequest();
+    xhr.open('HEAD', filename, false);
+    xhr.send();
+	if(xhr.status == 404){
+		location.reload();
+	}
 	await fetch(filename)
 		.then(function(reponse) {
 			return reponse.text();
 		})
 		.then(function(reponse) {
-			txt = reponse.split("\n")
-
-
-
+			txt = reponse.split("\n") // je lit les fichier du jeu
 		})
 
 
 		for (let X = 0; X < 16; X++) {
 			for (let Y = 0; Y < 32; Y++) {
 				this.#map[X][Y] = txt[X][Y];
-				
+				if(txt[X][Y] == 'D'){
+					this.#maxDiams++; // je compte le nombre de diamants pour detecter la victoire
+				}else if(txt[X][Y] == 'P'){// et je determine la position de départ du joueur.
+					this.#playerX = X;
+					this.#playerY = Y;
+				}
 			}
 			
-		}
-
-
-		for(let x = 0; x<16;x++){
-			for (let y = 0; y < 32; y++) {
-				if (this.#map[x][y] == 'P'){
-					this.#playerX = x;
-					this.#playerY = y;
-				}
-				
-			}
 		}
 	
 	}
@@ -67,28 +80,32 @@ export class mine{
 		return this.#map[x][y]
 	}
 	PlayerMoxe(mx,my){
-		if(this.#gameOver) {return;}
+		if(this.#gameOver) {return;} // la fonction ne fonctionne plus si le joueur est mort ... normal quoi
 		if ((this.#playerX + mx >= 0 && this.#playerX + mx < 16) && (this.#playerY + mx >= 0 && this.#playerY + mx < 32)) {
 			let map = this.#map;
 			const next = this.#map[this.#playerX+mx][this.#playerY+my];
 			switch (next) { // on deplace le joueur
-				case 'T':
-					map[this.#playerX+mx][this.#playerY+my] = 'P';
+				case 'T': // si c'est de la terre ON CASSE LA TERRE
+					map[this.#playerX+mx][this.#playerY+my] = 'P'; 
 					map[this.#playerX][this.#playerY] = ' ';
 					this.#playerX = this.#playerX+mx;
 					this.#playerY = this.#playerY+my;
+					this.#move++;
 					break;
-				case 'M':
+				case 'M': // si c'est un mur ON ! fait rien en fait ...
 					
 					break;
-				case 'P':
+				case 'P': // ouaip le c'est problematique si ca arrive le joueur est donc bloqué si il se rencontre lui même je laisse ca la
+						// beaucoup de fun possible lors de la gen de la map par fichier ^^
 					// wtf
 					break;
-				case 'D':
+				case 'D': // si c'est un diamant ON VOLE LE DIAMANT
 					map[this.#playerX+mx][this.#playerY+my] = 'P'
 					map[this.#playerX][this.#playerY] = ' '
 					this.#playerX = this.#playerX+mx
 					this.#playerY = this.#playerY+my
+					this.#Diams ++
+					this.#move++;
 					break;
 				case 'R':
 					if (mx == 0 && map[this.#playerX+mx][this.#playerY+(2*my)] == ' ') {
@@ -97,45 +114,65 @@ export class mine{
 						map[this.#playerX][this.#playerY] = ' '
 						this.#playerX = this.#playerX+mx
 						this.#playerY = this.#playerY+my
+						this.#move++;
 					}
 
 					break;
-				case ' ':
+				case ' ': // si c'est un vide on utilise l'acion la plus cheatée du jeu: ON SE DEPLACE
 					map[this.#playerX+mx][this.#playerY+my] = 'P'
 					map[this.#playerX][this.#playerY] = ' '
 					this.#playerX = this.#playerX+mx
 					this.#playerY = this.#playerY+my
+					this.#move++; 
 					break;
 				default:
 					break;
 				}
 		}
 		this.appliedPhysic();
+		if (this.#Diams == this.#maxDiams && !this.#gameOver) { // on declare que le joueur a gagné si il recupére tout les diamants ET si il est toujours en vie
+																// possibilitée de se faire écraser par un rocher pendant le même temps de jeu peux probable mais au moins c'est fixed
+			console.log("C'est gagné")
+			this.#Win = true
+			this.#gameOver = true;
+		}
 	}
-	appliedPhysic(){
+	appliedPhysic(){ // bon celle la est un peux en bordel mais alons y
+		let move = true
+		while (move) {
+		move = false	
+
 		for (let X = 0; X < 16; X++) {
-			for (let Y = 0; Y <32; Y++) {
-				if(this.#map[X][Y] == 'R'  && this.#map[X+1][Y] == ' ' ){
+			for (let Y = 0; Y <32; Y++) { 
+				if(this.#map[X][Y] == 'R'  && this.#map[X+1][Y] == ' ' ){ // en premier lieu on regarde si un rocher est present sous un espace vide
 					this.#map[X+1][Y] = 'R';
 					this.#map[X][Y] = ' ';
-					for(let i = 2 ; X+i < 16; i++){
-						if(this.#map[X+i][Y] == 'P'){
+
+					for(let i = 2 ; X+i < 16; i++){ //ensuite quand un espace vide et detecté on boucle sur toute la ligne sous rocher pour savoir ou il s'arête
+						if(this.#map[X+i][Y] == 'P'){ // on regarde si le joueur se fait écraser par le rocher
 							console.log("gameOver")
 							this.#gameOver = true;
 							this.#map[X+i][Y] = 'R';
 							this.#map[X+i-1][Y] = ' ';
-						}if(this.#map[X+i][Y] != ' '){
+						}else if(this.#map[X+i][Y] != ' '){ // si il n'y a pas de vide en dessous on arete la boucle
 							break;
 						}else{
-							this.#map[X+i][Y] = 'R';
+							this.#map[X+i][Y] = 'R'; // sinon on deplace le rocher et on recommence !
 							this.#map[X+i-1][Y] = ' ';
 						}
 					}
+					move = true; // utilisé pour les deplacements en chaine (un rocher qui cree un espace vide sous un autre rocher en tombant)
 				}
 				
 			}
+		}
 			
 		}
-		console.log(this.#map)
 	}
+get move(){return this.#move};
+get Diams(){return this.#Diams};
+get maxDiams(){return this.#maxDiams};
+get Win(){return this.#Win};
+get level(){return this.#level};
+
 }
