@@ -8,7 +8,16 @@
         <h1>Bouldher Ponhy Dashu</h1>
         <h3>Choix du niveau :</h3>
         <div class = "menuniv">
-			<div>
+			<button type="button" href = "./index.html" onclick="Jycroa()">RETOUR A L'ACCUEIL</button>
+            <script>
+                function Jycroa(){
+                 if(confirm("Êtes-vous sûr ?") == true){
+                    document.location.href="./index.html"; 
+                 }
+
+                }
+            </script>
+            <div>
 				Lv1 :
 				<input type="file">
 				<button>X</button>
@@ -26,5 +35,6 @@
 				nouveau niveau : 
 				<input type="file">
 			</div>
+            
         </div>
     </body>
