@@ -58,13 +58,22 @@ body{
 .score
 {
 	max-height: 40px;
-	width: 100%;
+	width: 90%;
 	display:flex;
 	justify-content: space-between;
 	font-family:'Times New Roman', Times, serif;
 	color: rgb(228, 245, 120);
 }
+.gamenu
+{
+	margin: 0 auto;
+	
+	padding: 10px;
+	display: flex;
 
+	justify-content: space-between;
+	max-width: 60%;
+}
 button {
 	
 	color: white;
