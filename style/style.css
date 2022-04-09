@@ -12,6 +12,7 @@ font-family:'Times New Roman', Times, serif;
 font-size: 50px;
 color: turquoise;
 }
+
 h3
 {
 	display: flex;
@@ -54,7 +55,15 @@ body{
 
 	background-color: rgb(100, 4, 104);
 }
-
+.score
+{
+	max-height: 40px;
+	width: 100%;
+	display:flex;
+	justify-content: space-between;
+	font-family:'Times New Roman', Times, serif;
+	color: rgb(228, 245, 120);
+}
 
 button {
 	
