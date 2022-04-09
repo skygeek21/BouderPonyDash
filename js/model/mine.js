@@ -2,6 +2,8 @@
 export class mine{
 
 #level
+#nbLv
+#maps
 #map
 #playerX
 #playerY
@@ -12,6 +14,7 @@ export class mine{
 #Win
 	constructor(){ // on constructeur tout ce qui ya de plus normal
 		this.#level = 1;
+		this.#nbLv = 3
 		this.#Win = false;
 		this.#gameOver = false
 		this.#move = 0;
@@ -22,6 +25,8 @@ export class mine{
 	}
 
 	initMap(){ // verifier si le joueur a une sauvegarde dans son local storage
+		this.#maps = [];
+
 		this.#map = Array(16);
 		for (let X = 0; X < 16; X++) {
 			this.#map[X] = Array(32);
@@ -30,49 +35,99 @@ export class mine{
 		this.#playerX = 1;
 		this.#playerY = 1;
 		this.#map[1][1] = 'P'
-	}
 
-
-	
-
-	
-	async readfile2(filename,Level){ // oui readfile2 ... on ne parlera pas de readfile1. Brrrr... j'ai des frissons rien que d'y pensser ...
-	this.#gameOver = false;
-	this.#Diams = 0;
-	this.#maxDiams = 0;
-	this.#move = 0;
-	this.#Win = false;
-		this.#level = Level;
-		let txt;
-    var xhr = new XMLHttpRequest();
-    xhr.open('HEAD', filename, false);
-    xhr.send();
-	if(xhr.status == 404){
-		location.reload();
-	}
-	await fetch(filename)
-		.then(function(reponse) {
-			return reponse.text();
-		})
-		.then(function(reponse) {
-			txt = reponse.split("\n") // je lit les fichier du jeu
-		})
-
-
-		for (let X = 0; X < 16; X++) {
-			for (let Y = 0; Y < 32; Y++) {
-				this.#map[X][Y] = txt[X][Y];
-				if(txt[X][Y] == 'D'){
-					this.#maxDiams++; // je compte le nombre de diamants pour detecter la victoire
-				}else if(txt[X][Y] == 'P'){// et je determine la position de départ du joueur.
-					this.#playerX = X;
-					this.#playerY = Y;
-				}
-			}
+		this.#maps.push(
+			[
+				['M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M'],
+				['M','P','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','M'],
+				['M','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','M'],
+				['M','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','M'],
+				['M','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','M'],
+				['M','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','M'],
+				['M','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','M'],
+				['M','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','M'],
+				['M','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','M'],
+				['M','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','M'],
+				['M','T','T','T','T','T','T','T','T','T','D','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','M'],
+				['M','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','D','T','T','T','T','T','T','M'],
+				['M','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','M'],
+				['M','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','M'],
+				['M','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','M'],
+				['M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M'],
+			]
 			
-		}
-	
+		);
+		this.#maps.push(
+			[
+				['M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M'],
+				['M','P','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','M'],
+				['M','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','M'],
+				['M','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','M'],
+				['M','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','M'],
+				['M','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','M'],
+				['M','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','M'],
+				['M','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','M'],
+				['M','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','M'],
+				['M','T','T','T','T','T','T','T','T','T','D','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','M'],
+				['M','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','M'],
+				['M','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','M'],
+				['M','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','M'],
+				['M','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','M'],
+				['M','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','M'],
+				['M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M'],
+			]
+			
+		);
+		this.#maps.push(
+			[
+				['M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M'],
+				['M','P','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','M'],
+				['M','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','M'],
+				['M','T','T','T','T','T','T','T','T','T','T','D','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','M'],
+				['M','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','M'],
+				['M','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','M'],
+				['M','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','M'],
+				['M','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','M'],
+				['M','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','M'],
+				['M','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','M'],
+				['M','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','M'],
+				['M','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','M'],
+				['M','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','M'],
+				['M','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','M'],
+				['M','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','M'],
+				['M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M'],
+			]
+			
+		);
 	}
+
+
+	async readfile3(filename){ // oui readfile2 ... on ne parlera pas de readfile1. Brrrr... j'ai des frissons rien que d'y pensser ...
+		let map;
+			let txt;
+		var xhr = new XMLHttpRequest();
+		xhr.open('HEAD', filename, false);
+		xhr.send();
+		if(xhr.status == 404){
+			location.reload();
+		}
+		await fetch(filename)
+			.then(function(reponse) {
+				return reponse.text();
+			})
+			.then(function(reponse) {
+				txt = reponse.split("\n") // je lit les fichier du jeu
+			})
+	
+	
+			for (let X = 0; X < 16; X++) {
+				for (let Y = 0; Y < 32; Y++) {
+					map[X][Y] = txt[X][Y];
+				}
+				
+			}
+		return map;
+		}
 
 	get map() { return this.#map;}
 
@@ -174,5 +229,29 @@ get Diams(){return this.#Diams};
 get maxDiams(){return this.#maxDiams};
 get Win(){return this.#Win};
 get level(){return this.#level};
+LoadMap(level){
+	this.#level = level;
+	this.#Win = false;
+	this.#gameOver = false
+	this.#move = 0;
+	this.#Diams = 0;
+	this.#maxDiams = 0;
+	if (level > this.#nbLv) {
+		location.reload();
+	}
+	this.#map = this.#maps[level-1]
+	for (let X = 0; X < 16; X++) {
+		for (let Y = 0; Y < 32; Y++) {
 
+			if(this.#map[X][Y] == 'D'){
+				this.#maxDiams++; // je compte le nombre de diamants pour detecter la victoire
+			}else if(this.#map[X][Y] == 'P'){// et je determine la position de départ du joueur.
+				this.#playerX = X;
+				this.#playerY = Y;
+			}
+		}
+		
+	}
+	console.log(level);
+}
 }

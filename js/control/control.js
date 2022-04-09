@@ -10,12 +10,11 @@ constructor(){
 	
 	this.#model = new mine();
 	this.#view = new view(this);
-	this.update(1);
-	
+
 }
 
 async update(level){
-	await this.#model.readfile2("../../LEVEL" +level,level)
+	await this.#model.LoadMap(level)
 	this.#view.afficher();
 
 }
