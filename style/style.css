@@ -70,10 +70,9 @@ body{
 }
 .score
 {
-	max-height: 40px;
-	width: 80%;
 	display:flex;
-	justify-content: space-between;
+	justify-content:space-evenly;
+	align-items:center;
 	font-family:'Times New Roman', Times, serif;
 	color: rgb(228, 245, 120);
 
@@ -85,8 +84,7 @@ body{
 	padding: 10px;
 	display: flex;
 
-	justify-content: space-between;
-	max-width: 60%;
+	justify-content: space-evenly;
 }
 button {
 	
@@ -117,11 +115,13 @@ background-color: rgb(100, 1, 100);
 game{
 	background-color: black;
 	color: rgb(255, 255, 255);
+
 }
 
 game > div {
     display: flex;
-
+	justify-content: center;
+	align-items:center;
 }
 
 game > div > img {
@@ -132,5 +132,4 @@ game > div > img {
 	max-width: min(3.125vw, 6.25vh);
 	min-height: min(3.125vw, 6.25vh);
 	max-height: min(3.125vw, 6.25vh);
-
 }
