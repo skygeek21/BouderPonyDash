@@ -11,7 +11,7 @@ export class mine{
 #gameOver
 #Win
 	constructor(){ // on constructeur tout ce qui ya de plus normal
-		this.#level = 1
+		this.#level = 1;
 		this.#Win = false;
 		this.#gameOver = false
 		this.#move = 0;
