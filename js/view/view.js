@@ -9,7 +9,12 @@ constructor(control){
 	document.addEventListener('keydown', (event) => {
 		this.#controleur.movePlayer(event.key);
 		this.afficher();
-		console.log("je suis la")
+		if(this.#controleur.GetWin()){
+			if (confirm("Felicitation vous avez gagné en " + this.#controleur.GetMoves() + " mouvements")) {
+				
+			}
+
+		}
 		// Alert the key name and key code on keydown
 
 	  }, true);
@@ -17,7 +22,7 @@ constructor(control){
 afficher(){
 	this.afficher_map();
 	this.afficher_score();
-
+	confirm
 }
 
 afficher_score(){

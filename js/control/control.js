@@ -57,4 +57,8 @@ GetDiams(){
 	return this.#model.Diams;
 }
 
+GetWin(){return this.#model.Win;}
+
+NextLevel(){ return this.#model.nextLevel()}
+
 }

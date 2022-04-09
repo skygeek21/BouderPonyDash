@@ -1,6 +1,7 @@
 
 export class mine{
 
+#level
 #map
 #playerX
 #playerY
@@ -8,7 +9,10 @@ export class mine{
 #move
 #maxDiams
 #gameOver
+#Win
 	constructor(){ // on constructeur tout ce qui ya de plus normal
+		this.#level = 1
+		this.#Win = false;
 		this.#gameOver = false
 		this.#move = 0;
 		this.#Diams = 0;
@@ -119,7 +123,8 @@ export class mine{
 		if (this.#Diams == this.#maxDiams && !this.#gameOver) { // on declare que le joueur a gagné si il recupére tout les diamants ET si il est toujours en vie
 																// possibilitée de se faire écraser par un rocher pendant le même temps de jeu peux probable mais au moins c'est fixed
 			console.log("C'est gagné")
-			alert("Felicitation vous avez gagné en " + this.#move + " mouvements" )
+			this.#Win = true
+			this.#gameOver = true;
 		}
 	}
 	appliedPhysic(){ // bon celle la est un peux en bordel mais alons y
@@ -157,5 +162,6 @@ export class mine{
 get move(){return this.#move};
 get Diams(){return this.#Diams};
 get maxDiams(){return this.#maxDiams};
+get Win(){return this.#Win};
 
 }
