@@ -10,13 +10,12 @@ constructor(){
 	
 	this.#model = new mine();
 	this.#view = new view(this);
-	this.update();
+	this.update("../../LEVEL1");
 	
 }
 
 async update(filename){
-	await this.#model.readfile2("../../LEVEL3")
-	console.log(this.#model.map);
+	await this.#model.readfile2(filename)
 	this.#view.afficher();
 
 }
@@ -44,6 +43,18 @@ switch (dir) {
 		break;
 }
 
+}
+
+GetMaxDiams(){
+	return this.#model.maxDiams;
+}
+
+GetMoves(){
+	return this.#model.move;
+}
+
+GetDiams(){
+	return this.#model.Diams;
 }
 
 }

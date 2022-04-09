@@ -14,11 +14,28 @@ constructor(control){
 
 	  }, true);
 }
-
 afficher(){
+	this.afficher_map();
+	this.afficher_score();
+
+}
+
+afficher_score(){
+	let scoreTag = document.querySelector("score");
+	let container = scoreTag.querySelector("div");
+	let contDiams = container.querySelector("AD")
+	contDiams.innerHTML = "Diams Available : " + this.#controleur.GetMaxDiams();
+	let score = container.querySelector("CD")
+	score.innerHTML = "Diams colected : " + this.#controleur.GetDiams();
+	let desp = container.querySelector("MOVES")
+	desp.innerHTML = "moves : " + this.#controleur.GetMoves();
+
+}
+
+afficher_map(){
 
 
-	const mapview = document.querySelector("game");
+	const mapview = document.querySelector("game"); // affiche la map
 	mapview.innerHTML = "";
 	for( var i = 0;i < 16; i++){
 		const linehtml = document.createElement("div");
