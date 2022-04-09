@@ -12,21 +12,11 @@ font-family:'Times New Roman', Times, serif;
 font-size: 50px;
 color: turquoise;
 }
-h3
-{
-	display: flex;
-justify-content: center;
-font-family:'Times New Roman', Times, serif;
-font-size: 25px;
-color: rgb(228, 245, 120);
-
-}
-
 
 body{
 
 	justify-content: center;
-	
+
 }
 
 .maintenace{
@@ -44,13 +34,14 @@ body{
 
 .menu
 {
+
 	margin: 0 auto;
 	
 	padding: 10px;
 	display: flex;
 
 	flex-direction: column;
-	max-width: 300px;
+	max-width: 400px;
 
 	background-color: rgb(100, 4, 104);
 }
@@ -96,7 +87,9 @@ game > div > img {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: min(3.125vw, 6.25vh);
-	height: min(3.125vw, 6.25vh);
+    min-width: min(3.125vw, 6.25vh);
+	max-width: min(3.125vw, 6.25vh);
+	min-height: min(3.125vw, 6.25vh);
+	max-height: min(3.125vw, 6.25vh);
 
 }
