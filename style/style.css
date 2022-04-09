@@ -27,7 +27,7 @@ color: rgb(228, 245, 120);
 body{
 
 	justify-content: center;
-
+	resize:both;
 }
 
 .maintenace{
@@ -59,11 +59,12 @@ body{
 .score
 {
 	max-height: 40px;
-	width: 90%;
+	width: 80%;
 	display:flex;
 	justify-content: space-between;
 	font-family:'Times New Roman', Times, serif;
 	color: rgb(228, 245, 120);
+
 }
 .gamenu
 {
@@ -92,13 +93,14 @@ button {
 
 button:hover{
 	color: black;
-	background-color: rgb(243, 108, 255);
+	background-color: turquoise;
 }
 
 
 
 body{
-background-color:  rgb(214, 59, 228);
+background-color: rgb(100, 1, 100);
+
 }
 game{
 	background-color: black;

@@ -31,9 +31,9 @@ afficher_score(){
 	let contDiams = container.querySelector("AD")
 	contDiams.innerHTML = "Diams Available : " + this.#controleur.GetMaxDiams();
 	let score = container.querySelector("CD")
-	score.innerHTML = "Diams colected : " + this.#controleur.GetDiams();
+	score.innerHTML = "Diams collected : " + this.#controleur.GetDiams();
 	let desp = container.querySelector("MOVES")
-	desp.innerHTML = "moves : " + this.#controleur.GetMoves();
+	desp.innerHTML = "Moves : " + this.#controleur.GetMoves();
 
 }
 
