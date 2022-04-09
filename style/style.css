@@ -12,6 +12,16 @@ font-family:'Times New Roman', Times, serif;
 font-size: 50px;
 color: turquoise;
 }
+h3
+{
+	display: flex;
+justify-content: center;
+font-family:'Times New Roman', Times, serif;
+font-size: 25px;
+color: rgb(228, 245, 120);
+
+}
+
 
 body{
 
