@@ -140,11 +140,12 @@ maps
 			 
 		var fr=new FileReader();
 		fr.readAsText(event.target.files[0]);
+		let obj = this
 		fr.onload=function(){
 
-			this.#lvNb++
-			this.maps.push(txtToMap(fr.result));
-			this.update();
+			obj.incLevel()
+			obj.maps.push(txtToMap(fr.result));
+			obj.update();
 		}
 
 
@@ -157,7 +158,7 @@ maps
 	update(){
 		localStorage.setItem("manageMaps", JSON.stringify(this.maps));
 		localStorage.setItem("mapManageLevel",this.#lvNb);
-		//document.location.href="./chgniv.html"; 
+		document.location.href="./chgniv.html"; 
 	}
 
 	onLoadLevel(){
@@ -165,6 +166,8 @@ maps
 		this.update();
 
 	}
+
+incLevel(){this.#lvNb++}
 
 }
 
