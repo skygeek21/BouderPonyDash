@@ -65,4 +65,18 @@ NextLevel(){
 
 }
 
+getProgress(){
+	if(localStorage.getItem("ProgressLevel") != null){
+		this.#model.level = localStorage.getItem("ProgressLevel")
+		this.#model.map = localStorage.getItem("ProgressMap")
+		this.#model.move = localStorage.getItem("ProgressMove")
+		this.#model.Diams = localStorage.getItem("ProgressCDiams")
+		this.#model.maxDiams = localStorage.getItem("ProgressTotDiams")
+		this.#view.afficher()
+		console.log("SALUT")
+	}else{
+		this.update(1)
+	}
+
+}
 }

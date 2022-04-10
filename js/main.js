@@ -17,34 +17,42 @@ class main{
 		this.#manage = new fileManage();
 	}
 
-	lauchGame(){
+	lauchGame(newGame){
+		console.log(localStorage.getItem("newGame"))
+		console.log(newGame)
+		if(newGame == 11){
+			console.log("HI");
+		this.#control.getProgress();
+		}else{
 		this.#control.update(1);
+		}
 	}
 
 }
 
 const m = new main();
-
-console.log("coucou");
 	
 window.addEventListener("load", () => {
 
 	switch (document.body.id) {
 		case "home":
 			var btnN = document.getElementById("newPart")
-			btnN.onclick = function() { window.location.href = './game.html';
-				
-				m.lauchGame();								
+			btnN.onclick = function() {
+				localStorage.setItem("newGame", 0);
+				window.location.href = './game.html';
+								
 		};
-			var btnC = document.getElementById("newPart")
-			btnC.onclick = function() { window.location.href = './game.html';};
+			var btnC = document.getElementById("continue")
+			btnC.onclick = function() { 
+				localStorage.setItem("newGame", 11);
+				window.location.href = './game.html';};
 			break;
 
 		case "swlvl":
 			m.lauchManage();
 			break;
 		case "game":
-
+				m.lauchGame(localStorage.getItem("newGame"));
 			break;
 		default:
 			break;

@@ -36,6 +36,7 @@ export class mine{
 		this.#playerY = 1;
 		this.#map[1][1] = 'P'
 
+		if(localStorage.getItem("mapManageLevel") == null){
 		this.#maps.push(
 			[
 				['M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M'],
@@ -99,6 +100,7 @@ export class mine{
 			]
 			
 		);
+		}
 	}
 
 
@@ -221,7 +223,11 @@ export class mine{
 				
 			}
 		}
-			
+		localStorage.setItem("ProgressLevel",this.#level)
+		localStorage.setItem("ProgressMap", JSON.stringify(this.#map))
+		localStorage.setItem("ProgressMove",this.#move)
+		localStorage.setItem("ProgressCDiams",this.#Diams)
+		localStorage.setItem("ProgressTotDiams",this.#maxDiams)
 		}
 	}
 get move(){return this.#move};
@@ -254,4 +260,11 @@ LoadMap(level){
 	}
 	console.log(level);
 }
+
+set level(lv){this.#level = lv}
+set map(map){this.#map =  JSON.parse(map); console.log(map)}
+set Diams(D){this.#Diams = D}
+set maxDiams(D){this.#maxDiams = D}
+set move(M){this.#move = M}
+
 }

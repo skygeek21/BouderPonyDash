@@ -13,7 +13,9 @@
                  function Marchestp() {
                 if (confirm("Êtes-vous sûr ?") == true)
                 {
+					localStorage.setItem("newGame", 0);
                     document.location.href="./game.html"; 
+
                 } 
             }</script>
             <button type="button" href = "./index.html" onclick="Jycroa()">ACCUEIL</button>
