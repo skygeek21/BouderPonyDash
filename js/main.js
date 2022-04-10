@@ -10,14 +10,17 @@ class main{
 
 	constructor()
 	{
-		this.#control = new control();
+
 	}
+
+
 
 	lauchManage(){
 		this.#manage = new fileManage();
 	}
 
 	lauchGame(newGame){
+		this.#control = new control();
 		console.log(localStorage.getItem("newGame"))
 		console.log(newGame)
 		if(newGame == 11){

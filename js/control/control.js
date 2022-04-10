@@ -68,10 +68,21 @@ NextLevel(){
 getProgress(){
 	if(localStorage.getItem("ProgressLevel") != null){
 		this.#model.level = localStorage.getItem("ProgressLevel")
-		this.#model.map = localStorage.getItem("ProgressMap")
+		let map = JSON.parse(localStorage.getItem("ProgressMap"))
+		this.#model.map = map
 		this.#model.move = localStorage.getItem("ProgressMove")
 		this.#model.Diams = localStorage.getItem("ProgressCDiams")
 		this.#model.maxDiams = localStorage.getItem("ProgressTotDiams")
+		for (let X = 0; X < 16; X++) {
+			for (let Y = 0; Y < 32; Y++) {
+	
+				if(map[X][Y] == 'D'){
+				}else if(map[X][Y] == 'P'){//je determine la position du joueur.
+					this.#model.playerX = X;
+					this.#model.playerY = Y;
+				}
+			}
+		}
 		this.#view.afficher()
 		console.log("SALUT")
 	}else{
