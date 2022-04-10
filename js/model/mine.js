@@ -1,6 +1,9 @@
 
 export class mine{
 
+#level
+#nbLv
+#maps
 #map
 #playerX
 #playerY
@@ -8,7 +11,11 @@ export class mine{
 #move
 #maxDiams
 #gameOver
+#Win
 	constructor(){ // on constructeur tout ce qui ya de plus normal
+		this.#level = 1;
+		this.#nbLv = 3;
+		this.#Win = false;
 		this.#gameOver = false
 		this.#move = 0;
 		this.#Diams = 0;
@@ -18,6 +25,8 @@ export class mine{
 	}
 
 	initMap(){ // verifier si le joueur a une sauvegarde dans son local storage
+		this.#maps = [];
+
 		this.#map = Array(16);
 		for (let X = 0; X < 16; X++) {
 			this.#map[X] = Array(32);
@@ -26,39 +35,107 @@ export class mine{
 		this.#playerX = 1;
 		this.#playerY = 1;
 		this.#map[1][1] = 'P'
-	}
 
-
-	
-
-	async readfile2(filename){ // oui readfile2 ... on ne parlera pas de readfile1. Brrrr... j'ai des frissons rien que d'y pensser ...
-	let txt;
-	await fetch(filename)
-		.then(function(reponse) {
-			return reponse.text();
-		})
-		.then(function(reponse) {
-			txt = reponse.split("\n") // je lit les fichier du jeu
-
-
-
-		})
-
-
-		for (let X = 0; X < 16; X++) {
-			for (let Y = 0; Y < 32; Y++) {
-				this.#map[X][Y] = txt[X][Y];
-				if(txt[X][Y] == 'D'){
-					this.#maxDiams++; // je compte le nombre de diamants pour detecter la victoire
-				}else if(txt[X][Y] == 'P'){// et je determine la position de départ du joueur.
-					this.#playerX = X;
-					this.#playerY = Y;
-				}
-			}
+		if(localStorage.getItem("mapManageLevel") == null){
+		this.#maps.push(
+			[
+				['M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M'],
+				['M','P','R','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','M'],
+				['M','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','M'],
+				['M','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','M'],
+				['M','T','T','T','T','T','T','T','T','T','R','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','M'],
+				['M','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','M'],
+				['M','T','T','T','T','T','T','T','T','T','D','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','M'],
+				['M','T','T','T','T','T','T','T','T','T','T','T','T','T','R','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','M'],
+				['M','T','T','T','T','T','T','T','T','T','T','T','T','T','D','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','M'],
+				['M','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','M'],
+				['M','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','M'],
+				['M','T','T','D','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','D','T','T','T','T','T','T','M'],
+				['M','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','M'],
+				['M','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','M'],
+				['M','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','M'],
+				['M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M']
+			]
 			
+		);
+		this.#maps.push(
+			[
+				['M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M'],
+				['M','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','M'],
+				['M','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','M'],
+				['M','T','T','T','T','T','T','T','T','T','T','D','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','M'],
+				['M','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','M'],
+				['M','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','R','T','T','T','T','T','T','T','T','T','T','T','T','T','T','M'],
+				['M','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','D','T','T','T','T','T','T','T','T','T','T','T','T','T','T','M'],
+				['M','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','M'],
+				['M','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','M'],
+				['M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','R','R','M','M','M','M','M','M'],
+				['M','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','R','R','T','T','T','T','T','M'],
+				['M','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','R','R','T','T','T','T','T','M'],
+				['M','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','D','T','T','T','T','T','T','R','R','T','T','T','T','T','M'],
+				['M','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','R','T','T','T','T','T','T','M'],
+				['M','P','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','R','T','T','T','T','M'],
+				['M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M']
+			]
+			
+		);
+		this.#maps.push(
+			[
+				['M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M'],
+				['M','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','M'],
+				['M','T','T','T','T','T','D','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','M'],
+				['M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','R','R','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M'],
+				['M','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','M'],
+				['M','T','T','T','T','T','T','D','T','T','T','T','T','T','T','T','R','T','T','T','T','T','T','T','T','T','T','T','T','T','T','M'],
+				['M','M','M','M','M','M','M','R','R','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M'],
+				['M','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','M'],
+				['M','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','M'],
+				['M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','R','R','M','M','M','M','M','M'],
+				['M','T','T','T','D','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','R','R','T','T','T','T','T','M'],
+				['M','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','M'],
+				['M','M','M','M','M','M','M','M','M','M','R','R','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M'],
+				['M','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','R','T','T','T','T','T','T','M'],
+				['M','P','T','T','T','D','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','R','T','T','T','T','M'],
+				['M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M']
+			]
+			
+		);
+		localStorage.setItem("manageMaps", JSON.stringify(this.#maps));
+		localStorage.setItem("mapManageLevel",this.#nbLv);
+		}else{
+			this.#nbLv = localStorage.getItem("mapManageLevel")
+			this.#maps =  JSON.parse(localStorage.getItem("manageMaps"))
 		}
-	
+		console.log(this.#maps)
 	}
+
+
+	async readfile3(filename){ // oui readfile3 ... on ne parlera pas de readfile2 et encore moins de readfile1. Brrrr... j'ai des frissons rien que d'y pensser ...
+		let map;
+			let txt;
+		var xhr = new XMLHttpRequest();
+		xhr.open('HEAD', filename, false);
+		xhr.send();
+		if(xhr.status == 404){
+			location.reload();
+		}
+		await fetch(filename)
+			.then(function(reponse) {
+				return reponse.text();
+			})
+			.then(function(reponse) {
+				txt = reponse.split("\n") // je lit les fichier du jeu
+			})
+	
+	
+			for (let X = 0; X < 16; X++) {
+				for (let Y = 0; Y < 32; Y++) {
+					map[X][Y] = txt[X][Y];
+				}
+				
+			}
+		return map;
+		}
 
 	get map() { return this.#map;}
 
@@ -66,6 +143,7 @@ export class mine{
 		return this.#map[x][y]
 	}
 	PlayerMoxe(mx,my){
+
 		if(this.#gameOver) {return;} // la fonction ne fonctionne plus si le joueur est mort ... normal quoi
 		if ((this.#playerX + mx >= 0 && this.#playerX + mx < 16) && (this.#playerY + mx >= 0 && this.#playerY + mx < 32)) {
 			let map = this.#map;
@@ -119,6 +197,8 @@ export class mine{
 		if (this.#Diams == this.#maxDiams && !this.#gameOver) { // on declare que le joueur a gagné si il recupére tout les diamants ET si il est toujours en vie
 																// possibilitée de se faire écraser par un rocher pendant le même temps de jeu peux probable mais au moins c'est fixed
 			console.log("C'est gagné")
+			this.#Win = true
+			this.#gameOver = true;
 		}
 	}
 	appliedPhysic(){ // bon celle la est un peux en bordel mais alons y
@@ -150,7 +230,51 @@ export class mine{
 				
 			}
 		}
-			
+		localStorage.setItem("ProgressLevel",this.#level)
+		localStorage.setItem("ProgressMap", JSON.stringify(this.#map))
+		localStorage.setItem("ProgressMove",this.#move)
+		localStorage.setItem("ProgressCDiams",this.#Diams)
+		localStorage.setItem("ProgressTotDiams",this.#maxDiams) // on sauvegarde la map dans le local storage 
 		}
 	}
+get move(){return this.#move};
+get Diams(){return this.#Diams};
+get maxDiams(){return this.#maxDiams};
+get Win(){return this.#Win};
+get level(){return this.#level};
+LoadMap(level){
+	this.#level = level;
+	this.#Win = false;
+	this.#gameOver = false
+	this.#move = 0;
+	this.#Diams = 0;
+	this.#maxDiams = 0;
+	if (level > this.#nbLv) {
+		location.reload();
+	}
+	this.#map = this.#maps[level-1]
+	for (let X = 0; X < 16; X++) {
+		for (let Y = 0; Y < 32; Y++) {
+
+			if(this.#map[X][Y] == 'D'){
+				this.#maxDiams++; // je compte le nombre de diamants pour detecter la victoire
+			}else if(this.#map[X][Y] == 'P'){// et je determine la position de départ du joueur.
+				this.#playerX = X;
+				this.#playerY = Y;
+			}
+		}
+		
+	}
+	console.log(this.#map);
+	console.log(level);
+}
+
+set level(lv){this.#level = lv}
+set map(map){this.#map =  map} // de toute facon je ne vais pas utilisser cette methode autrement q'avec le localstorage 
+set Diams(D){this.#Diams = D}
+set maxDiams(D){this.#maxDiams = D}
+set move(M){this.#move = M}
+set playerX(X){this.#playerX = X}
+set playerY(Y){this.#playerY = Y}
+
 }
