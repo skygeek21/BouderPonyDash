@@ -106,6 +106,7 @@ export class mine{
 			this.#nbLv = localStorage.getItem("mapManageLevel")
 			this.#maps =  JSON.parse(localStorage.getItem("manageMaps"))
 		}
+		console.log(this.#maps)
 	}
 
 
@@ -264,6 +265,7 @@ LoadMap(level){
 		}
 		
 	}
+	console.log(this.#map);
 	console.log(level);
 }
 

@@ -22,7 +22,7 @@ constructor(control){
 afficher(){
 	this.afficher_map();
 	this.afficher_score();
-	confirm
+
 }
 
 afficher_score(){

@@ -1,18 +1,18 @@
-
-
 export class fileManage{
 
 #lvNb
-#maps
+maps
 
 	constructor(){
 		this.scanLevels();
 		this.show()
+		this.setInput();
 	}
 	scanLevels(){
 		if(localStorage.getItem("mapManageLevel") == null){
 			this.#lvNb = 3
-			this.#maps.push(
+			this.maps = []
+			this.maps.push(
 				[
 					['M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M'],
 					['M','P','R','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','M'],
@@ -25,7 +25,7 @@ export class fileManage{
 					['M','T','T','T','T','T','T','T','T','T','T','T','T','T','D','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','M'],
 					['M','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','M'],
 					['M','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','M'],
-					['M','T','T','D','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','D','T','T','T','T','T','T','M'],
+					['M','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','D','T','T','T','T','T','T','M'],
 					['M','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','M'],
 					['M','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','M'],
 					['M','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','M'],
@@ -33,10 +33,10 @@ export class fileManage{
 				]
 				
 			);
-			this.#maps.push(
+			this.maps.push(
 				[
 					['M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M'],
-					['M','Ts','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','M'],
+					['M','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','M'],
 					['M','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','M'],
 					['M','T','T','T','T','T','T','T','T','T','T','D','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','M'],
 					['M','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','M'],
@@ -54,7 +54,7 @@ export class fileManage{
 				]
 				
 			);
-			this.#maps.push(
+			this.maps.push(
 				[
 					['M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M','M'],
 					['M','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','T','M'],
@@ -75,12 +75,15 @@ export class fileManage{
 				]
 				
 			);
-			localStorage.setItem("manageMaps", JSON.stringify(this.#maps));
+			localStorage.setItem("manageMaps", JSON.stringify(this.maps));
 			localStorage.setItem("mapManageLevel",this.#lvNb);
+			console.log(this.maps)
+			console.log(JSON.parse(JSON.stringify(this.maps)))
 			}else{
 				this.#lvNb = localStorage.getItem("mapManageLevel")
-				this.#maps =  JSON.parse(localStorage.getItem("manageMaps"))
+				this.maps =  JSON.parse(localStorage.getItem("manageMaps"))
 			}
+
 	}
 	show(){
 		let array = document.getElementsByClassName("menu")
@@ -93,7 +96,6 @@ export class fileManage{
 			inp = document.createElement("input");
 			inp.type = "file"
 			inp.id = "Lv" + I
-			inp.click;
 			btn = document.createElement("button");
 			btn.id = "Lv" + I + 'B';
 			btn.innerHTML = "X"
@@ -108,9 +110,79 @@ export class fileManage{
 			div.innerHTML = "Nouveau Niveau"
 			inp = document.createElement("input");
 			inp.type = "file"
-			inp.click();
+			inp.id = "NewLevel"
+
 			div.appendChild(inp)
 			menu.appendChild(div);
 	}
 
+	setInput(){
+		for (let I = 1; I <= this.#lvNb; I++) {
+			console.log(I)
+			const fileSelector = document.getElementById('Lv'+I); 
+			fileSelector.addEventListener('change', (event) => {
+				 
+			var fr=new FileReader();
+			fr.readAsText(event.target.files[0]);
+			let obj = this
+			fr.onload=function(){
+				console.log(obj.maps);
+				obj.maps[I-1] = txtToMap(fr.result);
+				console.log(obj.maps);
+				obj.update();
+			}
+
+			});
+			
+		}
+		const fileSelector = document.getElementById("NewLevel"); 
+		fileSelector.addEventListener('change', (event) => {
+			 
+		var fr=new FileReader();
+		fr.readAsText(event.target.files[0]);
+		fr.onload=function(){
+
+			this.#lvNb++
+			this.maps.push(txtToMap(fr.result));
+			this.update();
+		}
+
+
+
+	});
+
+
+	}
+
+	update(){
+		localStorage.setItem("manageMaps", JSON.stringify(this.maps));
+		localStorage.setItem("mapManageLevel",this.#lvNb);
+		//document.location.href="./chgniv.html"; 
+	}
+
+	onLoadLevel(){
+		this.maps[I-1] = txtToMap(fr.result);
+		this.update();
+
+	}
+
 }
+
+function txtToMap(text){
+
+	let Text = new String(text);
+	console.log(text);
+	let txt = Text.split("\n") // je lit les fichier du jeu
+	console.log(txt);
+	
+	let map = Array(16);
+		for (let X = 0; X < 16; X++) {
+			map[X]= Array(32)
+			for (let Y = 0; Y < 32; Y++) {
+				map[X][Y] = txt[X][Y];
+			}
+			
+		}
+
+	return map;
+	}
