@@ -13,10 +13,20 @@ font-size: 50px;
 color: turquoise;
 }
 
+h3
+{
+	display: flex;
+justify-content: center;
+font-family:'Times New Roman', Times, serif;
+font-size: 25px;
+color: rgb(228, 245, 120);
+
+}
+
+
 body{
 
 	justify-content: center;
-
 }
 
 .maintenace{
@@ -45,8 +55,37 @@ body{
 
 	background-color: rgb(100, 4, 104);
 }
+.menuniv
+{
+	display:flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+	color: rgb(100, 4, 104);
+}
+.menuniv > div
+{
+	background-color:rgb(214, 59, 228);
+	margin-top:10px;
+}
+.score
+{
+	display:flex;
+	justify-content:space-evenly;
+	align-items:center;
+	font-family:'Times New Roman', Times, serif;
+	color: rgb(228, 245, 120);
 
+}
+.gamenu
+{
+	margin: 0 auto;
+	
+	padding: 10px;
+	display: flex;
 
+	justify-content: space-evenly;
+}
 button {
 	
 	color: white;
@@ -64,7 +103,7 @@ button {
 
 button:hover{
 	color: black;
-	background-color: rgb(243, 108, 255);
+	background-color: turquoise;
 }
 
 
@@ -76,20 +115,21 @@ background-color: rgb(100, 1, 100);
 game{
 	background-color: black;
 	color: rgb(255, 255, 255);
+
 }
 
 game > div {
     display: flex;
-
+	justify-content: center;
+	align-items:center;
 }
 
 game > div > img {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-width: min(3.125vw, 6.25vh);
-	max-width: min(3.125vw, 6.25vh);
-	min-height: min(3.125vw, 6.25vh);
-	max-height: min(3.125vw, 6.25vh);
-
+    min-width:  min(2vw, 4vh);
+	max-width:  min(2vw, 4vh);
+	min-height:  min(2vw, 4vh);
+	max-height: min(2vw, 4vh);
 }

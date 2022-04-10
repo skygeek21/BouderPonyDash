@@ -7,7 +7,17 @@
     <body id="swlvl">
         <h1>Bouldher Ponhy Dashu</h1>
         <h3>Choix du niveau :</h3>
-        <div class = "menu">
+		<button type="button" href = "./index.html" onclick="Jycroa()">RETOUR A L'ACCUEIL</button>
+		<script>
+			function Jycroa(){
+			 if(confirm("Êtes-vous sûr ?") == true){
+				document.location.href="./index.html"; 
+			 }
+
+			}
+		</script>
+		<div class = "menu">
+
         </div>
 
 		<script type="module" src="js/main.js"></script>
